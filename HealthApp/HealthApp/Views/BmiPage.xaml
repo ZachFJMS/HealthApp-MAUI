@@ -1,0 +1,52 @@
+<ContentPage
+    x:Class="HealthApp.Views.BmiPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="BMI History">
+
+    <VerticalStackLayout Padding="15">
+
+        <Label Text="Your BMI History"
+               FontSize="40"
+               FontAttributes="Bold"
+               Margin="0,0,0,10"
+               FontFamily="Dongle-Regular"/>
+
+        <GraphicsView x:Name="BmiChart"
+              HeightRequest="220"
+              HorizontalOptions="Fill"
+              Margin="10,15,20,20"/>
+
+
+        <CollectionView x:Name="HistoryCollection">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="#DDDDDD"
+                            StrokeThickness="1"
+                            Padding="10"
+                            StrokeShape="RoundRectangle 10"
+                            Margin="0,15,0,0">
+
+                        <VerticalStackLayout>
+
+                            <Label Text="{Binding Date, StringFormat='Date: {0:dd MMM yyyy HH:mm}'}"
+                                   FontSize="12"/>
+
+                            <Label Text="{Binding Bmi, StringFormat='BMI: {0}'}"
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="{Binding Category, StringFormat='Category: {0}'}"
+                                   FontSize="12"/>
+
+                        </VerticalStackLayout>
+
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>

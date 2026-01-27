@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthApp.Views.LoginPage"
+             Title="LoginPage">
+    
+    <VerticalStackLayout
+        Padding="40"
+        Spacing="25"
+        VerticalOptions="Center">
+
+        <Label
+            Text="Firefly"
+            FontSize="50"
+            FontFamily="Dongle-Regular"
+            TextColor="White"
+            HorizontalOptions="Center" />
+
+        <Entry
+            x:Name="UsernameEntry"
+            Placeholder="Username"
+            TextColor="White"
+            WidthRequest="400"
+            PlaceholderColor="#AAAAAA"
+            BackgroundColor="#333333"
+            HeightRequest="50"
+            Keyboard="Default" />
+
+        <Entry
+            x:Name="PasswordEntry"
+            Placeholder="Password"
+            IsPassword="True"
+            WidthRequest="400"
+            TextColor="White"
+            PlaceholderColor="#AAAAAA"
+            BackgroundColor="#333333"
+            HeightRequest="50" />
+
+        <Button
+            Text="Login"
+            FontSize="30"
+            FontFamily="Dongle-Regular"
+            CornerRadius="12"
+            Padding="15"
+            WidthRequest="150"
+            BackgroundColor="#4A90E2"
+            TextColor="White"
+            Clicked="OnLoginClicked" />
+
+    </VerticalStackLayout>
+
+</ContentPage>
+

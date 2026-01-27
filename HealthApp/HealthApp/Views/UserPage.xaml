@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthApp.Views.UserPage"
+             Title="UserPage">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Border Stroke="PowderBlue"
+        StrokeThickness="3"
+        BackgroundColor="White"
+        Padding="15"
+        StrokeShape="RoundRectangle 16"
+        HorizontalOptions="Fill">
+
+            <VerticalStackLayout Spacing="10">
+                
+                <!-- Title -->
+                <Label Text="Body Mass Index (BMI)"
+               FontAttributes="Bold"
+               FontSize="18"
+               TextColor="Black"
+               FontFamily="Dongle-Regular"/>
+
+                <!-- Current Value -->
+                <HorizontalStackLayout>
+                    <Label Text="Current BMI:"
+                   FontAttributes="Bold"/>
+                    <Label x:Name="BmiValueLabel"
+                   Text="Not calculated"/>
+                </HorizontalStackLayout>
+
+                <Label x:Name="BmiCategoryLabel"
+               FontSize="13"
+               TextColor="Gray"/>
+
+                <!-- Buttons -->
+                <HorizontalStackLayout Spacing="10">
+                    
+                    <Button Text="Calculate"
+                    Clicked="OnBmiCardTapped"
+                    BackgroundColor="LightBlue"/>
+
+                    <Button Text="View History"
+                    Clicked="OnViewBmiHistoryClicked"
+                    BackgroundColor="LightBlue"/>
+                    
+                </HorizontalStackLayout>
+
+                <!-- Description -->
+                <Label FontSize="13"
+                       TextColor="Gray"
+                       Text="BMI estimates body fat based on your height and weight and helps identify potential health risks."/>
+
+                <!-- Tips -->
+                <Label FontSize="13"
+                       TextColor="Gray"
+                       Text="Tip: Measure once per week, at the same time of day, for best trend accuracy."/>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+    </VerticalStackLayout>
+
+</ContentPage>
