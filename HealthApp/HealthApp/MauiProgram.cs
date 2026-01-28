@@ -18,7 +18,6 @@ namespace HealthApp
                 });
 
             builder.Services.AddSingleton<DatabaseService>();
-            builder.Services.AddSingleton<HealthScoreService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

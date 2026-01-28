@@ -17,8 +17,8 @@
         Route="UserPage" />
 
     <ShellContent
-    Title="BMI"
-    ContentTemplate="{DataTemplate local:BmiPage}"
-    Route="BmiPage" />
+        Title="BMI"
+        ContentTemplate="{DataTemplate local:BmiPage}"
+        Route="BmiPage" />
 
 </Shell>

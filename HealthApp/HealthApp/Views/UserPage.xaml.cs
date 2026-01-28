@@ -7,15 +7,13 @@ namespace HealthApp.Views;
 public partial class UserPage : ContentPage
 {
     private readonly DatabaseService _db;
-    private readonly HealthScoreService _healthService;
 
     public int UserId { get; set; }
 
-    public UserPage(DatabaseService db, HealthScoreService healthScoreServices)
+    public UserPage(DatabaseService db)
     {
         InitializeComponent();
         _db = db;
-        _healthService = healthScoreServices;
     }
 
     private async void OnBmiCardTapped(object sender, EventArgs e)
@@ -40,14 +38,16 @@ public partial class UserPage : ContentPage
             bmi < 30 ? "Overweight" :
             "Obese";
 
-        BmiCategoryLabel.Text = $"Category: {category}";
-        BmiValueLabel.Text = $"BMI: {bmi}";
+        BmiCategoryLabel.Text = "Category: " + category + "";
+        BmiValueLabel.Text = " " + bmi + "";
 
         // SAVE TO DATABASE
-        await _db.AddHealthRecord(new HealthRecord
+        await _db.AddBMIRecord(new BMIRecord
         {
             UserId = UserId,
             Date = DateTime.Now,
+            HeightCm = heightCm,
+            WeightKg = weightKg,
             Bmi = bmi,
             Category = category
         });
@@ -67,7 +67,7 @@ public partial class UserPage : ContentPage
             BindingContext = user;
         }
 
-        var record = await _db.GetLatestHealthRecord(UserId);
+        var record = await _db.GetLatestBMIRecord(UserId);
 
         if (record != null)
         {

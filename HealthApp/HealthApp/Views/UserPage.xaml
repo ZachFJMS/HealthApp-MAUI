@@ -6,9 +6,9 @@
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
-        <Border Stroke="PowderBlue"
+        <Border Stroke="Black"
         StrokeThickness="3"
-        BackgroundColor="White"
+        BackgroundColor="PowderBlue"
         Padding="15"
         StrokeShape="RoundRectangle 16"
         HorizontalOptions="Fill">
@@ -25,36 +25,41 @@
                 <!-- Current Value -->
                 <HorizontalStackLayout>
                     <Label Text="Current BMI:"
-                   FontAttributes="Bold"/>
+                       TextColor="Black"/>
                     <Label x:Name="BmiValueLabel"
-                   Text="Not calculated"/>
+                       Text=" Not calculated"
+                       TextColor="Black"/>
                 </HorizontalStackLayout>
 
                 <Label x:Name="BmiCategoryLabel"
-               FontSize="13"
-               TextColor="Gray"/>
+                   FontSize="13"
+                   TextColor="Black"/>
 
                 <!-- Buttons -->
                 <HorizontalStackLayout Spacing="10">
-                    
+
                     <Button Text="Calculate"
-                    Clicked="OnBmiCardTapped"
-                    BackgroundColor="LightBlue"/>
+                        Clicked="OnBmiCardTapped"
+                        BackgroundColor="LightBlue"
+                        BorderColor="Black"
+                        BorderWidth="2"/>
 
                     <Button Text="View History"
-                    Clicked="OnViewBmiHistoryClicked"
-                    BackgroundColor="LightBlue"/>
-                    
+                        Clicked="OnViewBmiHistoryClicked"
+                        BackgroundColor="LightBlue"
+                        BorderColor="Black"
+                        BorderWidth="2"/>
+
                 </HorizontalStackLayout>
 
                 <!-- Description -->
                 <Label FontSize="13"
-                       TextColor="Gray"
+                       TextColor="Black"
                        Text="BMI estimates body fat based on your height and weight and helps identify potential health risks."/>
 
                 <!-- Tips -->
                 <Label FontSize="13"
-                       TextColor="Gray"
+                       TextColor="Black"
                        Text="Tip: Measure once per week, at the same time of day, for best trend accuracy."/>
 
             </VerticalStackLayout>

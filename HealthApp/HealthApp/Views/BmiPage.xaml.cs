@@ -17,17 +17,21 @@ public partial class BmiPage : ContentPage
     {
         InitializeComponent();
         _db = db;
-
         BmiChart.Drawable = _chart;
+    }
+
+    public async void OnBackToDashboardClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///UserPage?userid=" + UserId);
     }
 
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
-
-        var records = (await _db.GetAllHealthRecords(UserId))
+        var records = (await _db.GetAllBMIRecords(UserId))
                 .OrderBy(r => r.Date)
+                .Reverse()
                 .ToList();
+
         HistoryCollection.ItemsSource = records;
 
         var bmiValues = records.Select(r => r.Bmi).ToList();

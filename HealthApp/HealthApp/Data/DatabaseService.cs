@@ -5,7 +5,7 @@ namespace HealthApp.Data
 {
     public class DatabaseService
     {
-        private SQLiteAsyncConnection _db;
+        private SQLiteAsyncConnection? _db;
 
         public async Task Init()
         {
@@ -15,7 +15,18 @@ namespace HealthApp.Data
             _db = new SQLiteAsyncConnection(path);
 
             await _db.CreateTableAsync<User>();
-            await _db.CreateTableAsync<HealthRecord>();
+            await _db.CreateTableAsync<BMIRecord>();
+        }
+
+        public async Task ResetDatabase()
+        {
+            var path = Path.Combine(FileSystem.AppDataDirectory, "health.db");
+
+            if (File.Exists(path))
+                File.Delete(path);
+
+            _db = null;
+            await Init();
         }
 
         // User-related methods \\
@@ -42,27 +53,27 @@ namespace HealthApp.Data
 
         // HealthRecord-related methods \\
 
-        public async Task AddHealthRecord(HealthRecord record)
+        public async Task AddBMIRecord(BMIRecord record)
         {
             await Init();
             await _db.InsertAsync(record);
         }
 
-        public async Task<HealthRecord> GetLatestHealthRecord(int userId)
+        public async Task<BMIRecord> GetLatestBMIRecord(int userId)
         {
             await Init();
 
-            return await _db.Table<HealthRecord>()
+            return await _db.Table<BMIRecord>()
                 .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.Date)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<HealthRecord>> GetAllHealthRecords(int userId)
+        public async Task<List<BMIRecord>> GetAllBMIRecords(int userId)
         {
             await Init();
 
-            return await _db.Table<HealthRecord>()
+            return await _db.Table<BMIRecord>()
                 .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.Date)
                 .ToListAsync();

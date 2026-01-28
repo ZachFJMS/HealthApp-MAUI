@@ -34,7 +34,10 @@ public partial class LoginPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        await _db.AddUser(new User {Username = "student", Password = "health123"});
+        await _db.AddUser(new User {
+            Username = "student", 
+            Password = "health123"
+        });
     }
 
 }
