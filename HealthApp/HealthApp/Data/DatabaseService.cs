@@ -17,6 +17,8 @@ namespace HealthApp.Data
             await _db.CreateTableAsync<User>();
             await _db.CreateTableAsync<BMIRecord>();
             await _db.CreateTableAsync<ActivityRecord>();
+            await _db.CreateTableAsync<SleepRecord>();
+
         }
 
         public async Task ResetDatabase()
@@ -88,7 +90,7 @@ namespace HealthApp.Data
             return await _db.InsertAsync(record);
         }
 
-        public async Task<List<ActivityRecord>> GetActivityRecords(int userId)
+        public async Task<List<ActivityRecord>> GetAllActivityRecords(int userId)
         {
             await Init();
             return await _db.Table<ActivityRecord>()
@@ -101,6 +103,32 @@ namespace HealthApp.Data
         {
             await Init();
             return await _db.Table<ActivityRecord>()
+                .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.Date)
+                .FirstOrDefaultAsync();
+        }
+
+        // SleepRecord-related method \\
+
+        public async Task<int> AddSleepRecord(SleepRecord record)
+        {
+            await Init();
+            return await _db.InsertAsync(record);
+        }
+
+        public async Task<List<SleepRecord>> GetAllSleepRecords(int userId)
+        {
+            await Init();
+            return await _db.Table<SleepRecord>()
+                .Where(r => r.UserId == userId)
+                .OrderBy(r => r.Date)
+                .ToListAsync();
+        }
+
+        public async Task<SleepRecord?> GetLatestSleepRecord(int userId)
+        {
+            await Init();
+            return await _db.Table<SleepRecord>()
                 .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.Date)
                 .FirstOrDefaultAsync();

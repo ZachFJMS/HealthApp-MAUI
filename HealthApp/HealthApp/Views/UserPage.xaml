@@ -7,67 +7,181 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-        <Border Stroke="Black"
-        StrokeThickness="3"
-        BackgroundColor="PowderBlue"
-        Padding="15"
-        StrokeShape="RoundRectangle 16"
-        HorizontalOptions="Fill">
+            <Border Stroke="Black"
+            StrokeThickness="3"
+            BackgroundColor="PowderBlue"
+            Padding="15"
+            StrokeShape="RoundRectangle 16"
+            HorizontalOptions="Fill">
 
-            <VerticalStackLayout Spacing="10">
-                
-                <!-- Title -->
-                <Label Text="Body Mass Index (BMI)"
-               FontAttributes="Bold"
-               FontSize="18"
-               TextColor="Black"
-               FontFamily="Dongle-Regular"/>
+                <VerticalStackLayout Spacing="10">
 
-                <!-- Current Value -->
-                <HorizontalStackLayout>
-                    <Label Text="Current BMI:"
+                    <!-- Title -->
+                    <Label Text="Body Mass Index (BMI)"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black"
+                   FontFamily="Dongle-Regular"/>
+
+                    <!-- Current Value -->
+                    <HorizontalStackLayout>
+                        <Label Text="Current BMI:"
+                           TextColor="Black"/>
+                        <Label x:Name="BmiValueLabel"
+                           Text=" Not calculated"
+                           TextColor="Black"/>
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="BmiCategoryLabel"
+                       FontSize="13"
                        TextColor="Black"/>
-                    <Label x:Name="BmiValueLabel"
-                       Text=" Not calculated"
-                       TextColor="Black"/>
-                </HorizontalStackLayout>
 
-                <Label x:Name="BmiCategoryLabel"
-                   FontSize="13"
-                   TextColor="Black"/>
+                    <!-- Buttons -->
+                    <HorizontalStackLayout Spacing="10">
 
-                <!-- Buttons -->
-                <HorizontalStackLayout Spacing="10">
+                        <Button Text="Calculate"
+                            Clicked="OnBmiCardTapped"
+                            BackgroundColor="LightBlue"
+                            BorderColor="Black"
+                            BorderWidth="2"/>
 
-                    <Button Text="Calculate"
-                        Clicked="OnBmiCardTapped"
-                        BackgroundColor="LightBlue"
-                        BorderColor="Black"
-                        BorderWidth="2"/>
+                        <Button Text="View History"
+                            Clicked="OnViewBmiHistoryClicked"
+                            BackgroundColor="LightBlue"
+                            BorderColor="Black"
+                            BorderWidth="2"/>
 
-                    <Button Text="View History"
-                        Clicked="OnViewBmiHistoryClicked"
-                        BackgroundColor="LightBlue"
-                        BorderColor="Black"
-                        BorderWidth="2"/>
+                    </HorizontalStackLayout>
 
-                </HorizontalStackLayout>
+                    <!-- Description -->
+                    <Label FontSize="13"
+                           TextColor="Black"
+                           Text="BMI estimates body fat based on your height and weight and helps identify potential health risks."/>
 
-                <!-- Description -->
-                <Label FontSize="13"
-                       TextColor="Black"
-                       Text="BMI estimates body fat based on your height and weight and helps identify potential health risks."/>
+                    <!-- Tips -->
+                    <Label FontSize="13"
+                           TextColor="Black"
+                           Text="Tip: Measure once per week, at the same time of day, for best trend accuracy."/>
 
-                <!-- Tips -->
-                <Label FontSize="13"
-                       TextColor="Black"
-                       Text="Tip: Measure once per week, at the same time of day, for best trend accuracy."/>
+                </VerticalStackLayout>
 
-            </VerticalStackLayout>
+            </Border>
 
-        </Border>
+            <Border Stroke="Black"
+                    StrokeThickness="3"
+                    BackgroundColor="PaleGreen"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 16"
+                    HorizontalOptions="Fill">   
+
+                <VerticalStackLayout Spacing="10">
+
+                    <!-- Title -->
+                    <Label Text="Physical Activity (PA)"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="Black"
+                           FontFamily="Dongle-Regular"/>
+
+                    <!-- Current Value -->
+                    <HorizontalStackLayout>
+                        <Label Text="Latest Activity: "
+                               TextColor="Black"/>
+                        <Label x:Name="ActivitySummaryLabel"
+                               Text=" Not logged"
+                               TextColor="Black"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Buttons -->
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Button Text="Log Activity"
+                                Clicked="OnActivityCardTapped"
+                                BackgroundColor="LightGreen"
+                                BorderColor="Black"
+                                BorderWidth="2"/>
+
+                        <Button Text="View History"
+                                Clicked="OnViewActivityHistoryClicked"
+                                BackgroundColor="LightGreen"
+                                BorderColor="Black"
+                                BorderWidth="2"/>
+
+                    </HorizontalStackLayout>
+
+                    <!-- Description -->
+                    <Label FontSize="13"
+                           TextColor="Black"
+                           Text="Tracks how long you stay physically active and estimates calories burned."/>
+
+
+                    <!-- Tips -->
+                    <Label FontSize="13"
+                           TextColor="Black"
+                           Text="Tip: Aim for at least 30 minutes of moderate activity per day."/>
+                </VerticalStackLayout>
+
+            </Border>
+
+            <Border Stroke="Black"
+                    StrokeThickness="3"
+                    BackgroundColor="MistyRose"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 16"
+                    HorizontalOptions="Fill">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <!-- Title -->
+                    <Label Text="Sleep Per Hour (SPH)"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="Black"
+                           FontFamily="Dongle-Regular"/>
+
+                    <!-- Current Value -->
+                    <HorizontalStackLayout>
+                        <Label Text="Last Sleep:"
+                               TextColor="Black"/>
+                        <Label x:Name="SleepValueLabel"
+                               Text=" Not recorded"
+                               TextColor="Black"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Buttons -->
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Button Text="Add Sleep"
+                                Clicked="OnAddSleepClicked"
+                                BackgroundColor="MistyRose"
+                                BorderColor="Black"
+                                BorderWidth="2"/>
+
+                        <Button Text="View History"
+                                Clicked="OnViewSleepHistoryClicked"
+                                BackgroundColor="MistyRose"
+                                BorderColor="Black"
+                                BorderWidth="2"/>
+
+                    </HorizontalStackLayout>
+
+                    <!-- Description -->
+                    <Label FontSize="13"
+                           TextColor="Black"
+                           Text="Tracks how many hours you sleep each night to help assess recovery and wellbeing."/>
+
+                    <!-- Tips -->
+                    <Label FontSize="13"
+                           TextColor="Black"
+                           Text="Tip: Log your sleep every morning for best accuracy."/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
 
         </VerticalStackLayout>
+        
     </ScrollView>
 
 </ContentPage>

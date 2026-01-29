@@ -58,6 +58,63 @@ public partial class UserPage : ContentPage
         await Shell.Current.GoToAsync($"///BmiPage?userid={UserId}");
     }
 
+    private async void OnActivityCardTapped(object sender, EventArgs e)
+    {
+        string minutesStr = await DisplayPromptAsync("Activity", "Minutes of activity:");
+        string caloriesStr = await DisplayPromptAsync("Activity", "Calories burned (estimate):");
+        string type = await DisplayPromptAsync("Activity", "Type (Walking, Gym, etc):");
+
+        if (!int.TryParse(minutesStr, out int minutes) ||
+            !double.TryParse(caloriesStr, out double calories))
+        {
+            await DisplayAlert("Error", "Invalid input", "OK");
+            return;
+        }
+
+        ActivitySummaryLabel.Text = " " + $" {minutes} min • {calories} kcal";
+
+        // SAVE TO DATABASE
+        await _db.AddActivityRecord(new ActivityRecord
+        {
+            UserId = UserId,
+            Date = DateTime.Now,
+            DurationMinutes = minutes,
+            CaloriesBurned = calories,
+            ActivityType = type ?? ""
+        });
+    }
+
+    private async void OnViewActivityHistoryClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync($"///ActivityPage?userid={UserId}");
+    }
+
+    private async void OnAddSleepClicked(object sender, EventArgs e)
+    {
+        string hoursStr = await DisplayPromptAsync("Sleep", "How many hours did you sleep?");
+
+        if (!double.TryParse(hoursStr, out double hours))
+        {
+            await DisplayAlert("Error", "Enter a valid number", "OK");
+            return;
+        }
+
+        SleepValueLabel.Text = $"{hours} hrs";
+
+        // SAVE TO DATABASE
+        await _db.AddSleepRecord(new SleepRecord
+        {
+            UserId = UserId,
+            Date = DateTime.Now,
+            HoursSlept = hours
+        });
+    }
+
+    private async void OnViewSleepHistoryClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync($"///SleepPage?userid={UserId}");
+    }
+
     protected override async void OnAppearing()
     {
         var user = await _db.GetUserById(UserId);
@@ -73,6 +130,20 @@ public partial class UserPage : ContentPage
         {
             BmiCategoryLabel.Text = $"Category: {record.Category}";
             BmiValueLabel.Text = $"{record.Bmi}";
+        }
+
+        var activityRecord = await _db.GetLatestActivityRecord(UserId);
+
+        if (activityRecord != null)
+        {
+            ActivitySummaryLabel.Text = $" {activityRecord.DurationMinutes} min • {activityRecord.CaloriesBurned} kcal";
+        }
+
+        var sleepRecord = await _db.GetLatestSleepRecord(UserId);
+
+        if (sleepRecord != null)
+        {
+            SleepValueLabel.Text = $"{sleepRecord.HoursSlept} hrs";
         }
     }
 }

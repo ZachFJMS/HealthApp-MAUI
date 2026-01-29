@@ -19,6 +19,7 @@ namespace HealthApp
 
             builder.Services.AddSingleton<DatabaseService>();
 
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

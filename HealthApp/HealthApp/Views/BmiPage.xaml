@@ -52,14 +52,14 @@
         </CollectionView>
 
         <Button Text="Back to Dashboard"
-        FontSize="20"
-        FontFamily="Dongle-Regular"
-        CornerRadius="12"
-        Padding="10"
-        Margin="15"
-        BackgroundColor="#4A90E2"
-        TextColor="White"
-        Clicked="OnBackToDashboardClicked"/>
+                FontSize="20"
+                FontFamily="Dongle-Regular"
+                CornerRadius="12"
+                Padding="10"
+                Margin="15"
+                BackgroundColor="#4A90E2"
+                TextColor="White"
+                Clicked="OnBackToDashboardClicked"/>
 
         </VerticalStackLayout>
     </ScrollView>

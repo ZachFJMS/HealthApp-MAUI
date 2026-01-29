@@ -21,4 +21,14 @@
         ContentTemplate="{DataTemplate local:BmiPage}"
         Route="BmiPage" />
 
+    <ShellContent
+        Title="Activity"
+        ContentTemplate="{DataTemplate local:ActivityPage}"
+        Route="ActivityPage" />
+
+    <ShellContent
+        Title="Sleep"
+        ContentTemplate="{DataTemplate local:SleepPage}"
+        Route="SleepPage" />
+
 </Shell>

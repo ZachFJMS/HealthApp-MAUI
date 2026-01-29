@@ -1,0 +1,69 @@
+<ContentPage
+    x:Class="HealthApp.Views.ActivityPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Activity History">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="15">
+
+            <Label Text="Your Activity History"
+                   FontSize="40"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,10"
+                   FontFamily="Dongle-Regular"/>
+
+            <Label x:Name="NoRecords"
+                   Text="No records have been recorded (2 records minimum to see results)"/>
+
+            <GraphicsView x:Name="ActivityChart"
+                          HeightRequest="220"
+                          HorizontalOptions="Fill"
+                          Margin="10,15,20,20"/>
+
+            <CollectionView x:Name="ActivityCollection">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#DDDDDD"
+                                StrokeThickness="1"
+                                Padding="10"
+                                StrokeShape="RoundRectangle 10"
+                                Margin="0,15,0,0">
+
+                            <VerticalStackLayout>
+
+                                <Label Text="{Binding Date, StringFormat='Date: {0:dd MMM yyyy HH:mm}'}"
+                                       FontSize="12"/>
+
+                                <Label Text="{Binding ActivityType, StringFormat='Type: {0}'}"
+                                       FontAttributes="Bold"/>
+
+                                <Label Text="{Binding DurationMinutes, StringFormat='Duration: {0} min'}"
+                                       FontSize="12"/>
+
+                                <Label Text="{Binding CaloriesBurned, StringFormat='Calories: {0} kcal'}"
+                                       FontSize="12"/>
+
+                            </VerticalStackLayout>
+
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+            <Button Text="Back to Dashboard"
+                    FontSize="20"
+                    FontFamily="Dongle-Regular"
+                    CornerRadius="12"
+                    Padding="10"
+                    Margin="15"
+                    BackgroundColor="#4A90E2"
+                    TextColor="White"
+                    Clicked="OnBackToDashboardClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

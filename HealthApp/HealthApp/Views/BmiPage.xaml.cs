@@ -41,10 +41,11 @@ public partial class BmiPage : ContentPage
             NoRecords.IsVisible = false;
         }
 
+        HistoryCollection.ItemsSource = null;
         HistoryCollection.ItemsSource = records;
 
         var bmiValues = records.Select(r => r.Bmi).ToList();
-        var dateLabels = records.Select(r => r.Date.ToString("dd/MM/yyyy")).ToList();
+        var dateLabels = records.Select(r => r.Date.ToString("dd/MM")).ToList();
 
         _chart.SetLineData(bmiValues, dateLabels);
         BmiChart.Invalidate();
