@@ -72,7 +72,7 @@ public partial class UserPage : ContentPage
         if (record != null)
         {
             BmiCategoryLabel.Text = $"Category: {record.Category}";
-            BmiValueLabel.Text = $"BMI: {record.Bmi}";
+            BmiValueLabel.Text = $"{record.Bmi}";
         }
     }
 }

@@ -16,6 +16,7 @@ namespace HealthApp.Data
 
             await _db.CreateTableAsync<User>();
             await _db.CreateTableAsync<BMIRecord>();
+            await _db.CreateTableAsync<ActivityRecord>();
         }
 
         public async Task ResetDatabase()
@@ -51,7 +52,7 @@ namespace HealthApp.Data
             return await _db.Table<User>().Where(u => u.Id == id).FirstOrDefaultAsync();
         }
 
-        // HealthRecord-related methods \\
+        // BMIRecord-related methods \\
 
         public async Task AddBMIRecord(BMIRecord record)
         {
@@ -77,6 +78,32 @@ namespace HealthApp.Data
                 .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.Date)
                 .ToListAsync();
+        }
+
+        // ActivityRecord-related methods \\
+
+        public async Task<int> AddActivityRecord(ActivityRecord record)
+        {
+            await Init();
+            return await _db.InsertAsync(record);
+        }
+
+        public async Task<List<ActivityRecord>> GetActivityRecords(int userId)
+        {
+            await Init();
+            return await _db.Table<ActivityRecord>()
+                .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.Date)
+                .ToListAsync();
+        }
+
+        public async Task<ActivityRecord?> GetLatestActivityRecord(int userId)
+        {
+            await Init();
+            return await _db.Table<ActivityRecord>()
+                .Where(r => r.UserId == userId)
+                .OrderByDescending(r => r.Date)
+                .FirstOrDefaultAsync();
         }
     }
 }

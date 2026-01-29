@@ -1,27 +1,26 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthApp.Models
 {
-    public class BMIRecord
+    public class ActivityRecord
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
         public int UserId { get; set; }
+
         public DateTime Date { get; set; }
 
         // ---- Health Factors ----
-        public double HeightCm { get; set; }
-        public double WeightKg { get; set; }
+        public int DurationMinutes { get; set; }
+        public double CaloriesBurned { get; set; }
 
         // ---- Derived Values ----
-        public double Bmi { get; set; }
-        public string Category { get; set; } = string.Empty;  // BMI or health category
+        public string ActivityType { get; set; } = string.Empty;
     }
-
 }

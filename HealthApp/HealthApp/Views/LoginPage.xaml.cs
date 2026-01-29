@@ -15,8 +15,8 @@ public partial class LoginPage : ContentPage
     private async void OnLoginClicked(object? sender, EventArgs e)
     {
 
-        var username = UsernameEntry.Text;   
-        var password = PasswordEntry.Text;
+        var username = UsernameEntry.Text.Trim();   
+        var password = PasswordEntry.Text.Trim();
 
         var user = await _db.GetUser(username, password);
 
@@ -27,13 +27,15 @@ public partial class LoginPage : ContentPage
         }
         else
         {
-            await DisplayAlert("Success", "Welcome" + username, "OK");
+            await DisplayAlert("Success", "Welcome " + username, "OK");
             await Shell.Current.GoToAsync($"UserPage?userid={user.Id}");
         }
     }
 
     protected override async void OnAppearing()
     {
+        await _db.ResetDatabase();
+
         await _db.AddUser(new User {
             Username = "student", 
             Password = "health123"

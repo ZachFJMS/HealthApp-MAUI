@@ -32,6 +32,15 @@ public partial class BmiPage : ContentPage
                 .Reverse()
                 .ToList();
 
+        if (records.Count < 2)
+        {
+            NoRecords.IsVisible = true;
+        }
+        else
+        {
+            NoRecords.IsVisible = false;
+        }
+
         HistoryCollection.ItemsSource = records;
 
         var bmiValues = records.Select(r => r.Bmi).ToList();

@@ -4,13 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="BMI History">
 
-    <VerticalStackLayout Padding="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="15">
 
         <Label Text="Your BMI History"
                FontSize="40"
                FontAttributes="Bold"
                Margin="0,0,0,10"
                FontFamily="Dongle-Regular"/>
+            
+        <Label x:Name="NoRecords"
+               Text="No records have been recorded (2 records minimum to see results)"/>
 
         <GraphicsView x:Name="BmiChart"
               HeightRequest="220"
@@ -57,6 +61,7 @@
         TextColor="White"
         Clicked="OnBackToDashboardClicked"/>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

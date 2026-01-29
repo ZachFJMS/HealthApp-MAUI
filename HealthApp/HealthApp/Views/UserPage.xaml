@@ -4,7 +4,8 @@
              x:Class="HealthApp.Views.UserPage"
              Title="UserPage">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
 
         <Border Stroke="Black"
         StrokeThickness="3"
@@ -66,6 +67,7 @@
 
         </Border>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>
