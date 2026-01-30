@@ -1,35 +1,42 @@
-using Microsoft.Maui.Graphics;
+
 
 namespace HealthApp.Views.Charts
 {
     public class ChartDrawable : IDrawable
     {
-        public enum ChartType
-        {
-            Line
-            // later: Bar, MultiLine, etc.
-        }
 
         private List<double> _values = new();
         private List<string> _xLabels = new();
-        private ChartType _type = ChartType.Line;
+
+        public ChartType ChartMode { get; set; } = ChartType.Line;
+
+        public enum ChartType
+        {
+            Line,
+            Bar
+        }
 
         public void SetLineData(List<double> values, List<string> xLabels)
         {
             _values = values ?? new List<double>();
             _xLabels = xLabels ?? new List<string>();
-            _type = ChartType.Line;
         }
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
+            if (_xLabels.Count != _values.Count)
+                return;
+
             if (_values.Count < 2)
                 return;
 
-            switch (_type)
+            switch (ChartMode)
             {
                 case ChartType.Line:
                     DrawLineChart(canvas, dirtyRect);
+                    break;
+                case ChartType.Bar:
+                    DrawBarChart(canvas, dirtyRect);
                     break;
             }
         }
@@ -142,6 +149,93 @@ namespace HealthApp.Views.Charts
                 canvas.FillCircle(x, y, radius);
                 canvas.DrawCircle(x, y, radius);
             }
+        }
+
+        // ------------------------
+        // BAR CHART DRAWING
+        // ------------------------
+        private void DrawBarChart(ICanvas canvas, RectF dirtyRect)
+        {
+            if (_values == null || _values.Count == 0)
+                return;
+
+            float paddingLeft = 55;
+            float paddingBottom = 40;
+            float paddingTop = 40;
+            float paddingRight = 45;
+
+            float width = dirtyRect.Width - paddingLeft - paddingRight;
+            float height = dirtyRect.Height - paddingTop - paddingBottom;
+
+            double min = 0;
+            double max = _values.Max();
+            if (max <= 0) max = 1;
+
+            double roundedMax = Math.Ceiling(max);
+
+            // ?? BACKGROUND
+            canvas.FillColor = Colors.White;
+            canvas.FillRectangle(dirtyRect);
+
+            int gridLines = 4;
+
+            // ?? GRID + Y AXIS LABELS
+            canvas.StrokeColor = Colors.LightGray;
+            canvas.StrokeSize = 0.5f;
+            canvas.FontColor = Colors.Black;
+            canvas.FontSize = 10;
+
+            for (int i = 0; i <= gridLines; i++)
+            {
+                float y = paddingTop + (i / (float)gridLines) * height;
+
+                canvas.DrawLine(paddingLeft, y, paddingLeft + width, y);
+
+                double value = roundedMax - (i / (double)gridLines) * (roundedMax - min);
+
+                canvas.DrawString(value.ToString("0"),
+                    2, y - 6, paddingLeft - 5, 12,
+                    HorizontalAlignment.Right, VerticalAlignment.Center);
+            }
+
+            // ?? X AXIS LABELS
+            int xPoints = _values.Count;
+            int labelStep = Math.Max(1, xPoints / 4);
+
+            float barSpacing = width / xPoints;
+            float barWidth = barSpacing * 0.6f;
+
+            for (int i = 0; i < xPoints; i++)
+            {
+                float x = paddingLeft + i * barSpacing + (barSpacing - barWidth) / 2;
+
+                float barHeight = (float)((_values[i] - min) / (roundedMax - min) * height);
+                float y = paddingTop + height - barHeight;
+
+                // ?? BAR
+                canvas.FillColor = Colors.MediumPurple;
+                canvas.FillRectangle(x, y, barWidth, barHeight);
+
+                // ?? BAR OUTLINE
+                canvas.StrokeColor = Colors.Purple;
+                canvas.StrokeSize = 1;
+                canvas.DrawRectangle(x, y, barWidth, barHeight);
+
+                // ?? X LABEL
+                if (i % labelStep == 0 && i < _xLabels.Count)
+                {
+                    canvas.FontSize = 10;
+                    canvas.DrawString(_xLabels[i],
+                        x - barWidth, paddingTop + height + 10,
+                        barWidth * 3, 30,
+                        HorizontalAlignment.Center, VerticalAlignment.Top);
+                }
+            }
+
+            // ?? AXIS BORDER
+            canvas.StrokeColor = Colors.Gray;
+            canvas.StrokeSize = 1;
+            canvas.DrawRectangle(paddingLeft, paddingTop, width, height);
         }
     }
 }

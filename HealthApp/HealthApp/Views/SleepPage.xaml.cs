@@ -18,6 +18,15 @@ public partial class SleepPage : ContentPage
 
         SleepChart.Drawable = _chart;
     }
+    private void OnToggleChartClicked(object sender, EventArgs e)
+    {
+        _chart.ChartMode =
+            _chart.ChartMode == ChartDrawable.ChartType.Line
+            ? ChartDrawable.ChartType.Bar
+            : ChartDrawable.ChartType.Line;
+
+        SleepChart.Invalidate();
+    }
 
     private async void OnBackToDashboardClicked(object sender, EventArgs e)
     {

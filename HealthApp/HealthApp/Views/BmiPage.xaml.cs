@@ -19,6 +19,15 @@ public partial class BmiPage : ContentPage
         _db = db;
         BmiChart.Drawable = _chart;
     }
+    private void OnToggleChartClicked(object sender, EventArgs e)
+    {
+        _chart.ChartMode =
+            _chart.ChartMode == ChartDrawable.ChartType.Line
+            ? ChartDrawable.ChartType.Bar
+            : ChartDrawable.ChartType.Line;
+
+        BmiChart.Invalidate();
+    }
 
     public async void OnBackToDashboardClicked(object sender, EventArgs e)
     {

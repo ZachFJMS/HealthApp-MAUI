@@ -20,6 +20,17 @@ public partial class ActivityPage : ContentPage
         ActivityChart.Drawable = _chart;
     }
 
+
+    private void OnToggleChartClicked(object sender, EventArgs e)
+    {
+        _chart.ChartMode =
+            _chart.ChartMode == ChartDrawable.ChartType.Line
+            ? ChartDrawable.ChartType.Bar
+            : ChartDrawable.ChartType.Line;
+
+        ActivityChart.Invalidate();
+    }
+
     public async void OnBackToDashboardClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///UserPage?userid=" + UserId);

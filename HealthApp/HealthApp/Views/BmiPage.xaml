@@ -17,12 +17,14 @@
                Text="No records have been recorded (2 records minimum to see results)"/>
 
         <GraphicsView x:Name="BmiChart"
-              HeightRequest="220"
-              HorizontalOptions="Fill"
-              Margin="10,15,20,20"/>
+                      HeightRequest="220"
+                      HorizontalOptions="Fill"
+                      Margin="10,15,20,20"/>
 
+        <Button Text="Switch Chart"
+                Clicked="OnToggleChartClicked"/>
 
-        <CollectionView x:Name="HistoryCollection">
+            <CollectionView x:Name="HistoryCollection">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>

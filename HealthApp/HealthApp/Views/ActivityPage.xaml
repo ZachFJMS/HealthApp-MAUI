@@ -21,6 +21,9 @@
                           HorizontalOptions="Fill"
                           Margin="10,15,20,20"/>
 
+            <Button Text="Switch Chart"
+                    Clicked="OnToggleChartClicked"/>
+
             <CollectionView x:Name="ActivityCollection">
 
                 <CollectionView.ItemTemplate>
