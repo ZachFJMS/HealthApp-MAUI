@@ -25,6 +25,9 @@ public partial class SleepPage : ContentPage
             ? ChartDrawable.ChartType.Bar
             : ChartDrawable.ChartType.Line;
 
+        _chart.YAxisLabel = "Hours Slept";
+        _chart.XAxisLabel = "Date";
+
         SleepChart.Invalidate();
     }
 

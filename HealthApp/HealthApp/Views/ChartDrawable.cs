@@ -1,5 +1,6 @@
 
 
+
 namespace HealthApp.Views.Charts
 {
     public class ChartDrawable : IDrawable
@@ -7,6 +8,9 @@ namespace HealthApp.Views.Charts
 
         private List<double> _values = new();
         private List<string> _xLabels = new();
+
+        public string XAxisLabel { get; set; } = "Date";
+        public string YAxisLabel { get; set; } = "Value";
 
         public ChartType ChartMode { get; set; } = ChartType.Line;
 
@@ -148,6 +152,7 @@ namespace HealthApp.Views.Charts
 
                 canvas.FillCircle(x, y, radius);
                 canvas.DrawCircle(x, y, radius);
+                DrawAxisLabels(canvas, dirtyRect);
             }
         }
 
@@ -236,6 +241,40 @@ namespace HealthApp.Views.Charts
             canvas.StrokeColor = Colors.Gray;
             canvas.StrokeSize = 1;
             canvas.DrawRectangle(paddingLeft, paddingTop, width, height);
+            DrawAxisLabels(canvas, dirtyRect);
+        }
+
+        private void DrawAxisLabels(ICanvas canvas, RectF dirtyRect)
+        {
+            canvas.FontColor = Colors.Black;
+            canvas.FontSize = 12;
+
+            // X AXIS LABEL (bottom centre)
+            canvas.DrawString(
+                XAxisLabel,
+                dirtyRect.Width / 2 - 50,
+                dirtyRect.Height - 20,
+                100,
+                20,
+                HorizontalAlignment.Center,
+                VerticalAlignment.Center);
+
+            // Y AXIS LABEL (rotated)
+            canvas.SaveState();
+
+            canvas.Translate(15, dirtyRect.Height / 2 + 50);
+            canvas.Rotate(-90);
+
+            canvas.DrawString(
+                YAxisLabel,
+                0,
+                0,
+                100,
+                20,
+                HorizontalAlignment.Center,
+                VerticalAlignment.Center);
+
+            canvas.RestoreState();
         }
     }
 }

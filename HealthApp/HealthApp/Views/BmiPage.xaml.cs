@@ -26,6 +26,9 @@ public partial class BmiPage : ContentPage
             ? ChartDrawable.ChartType.Bar
             : ChartDrawable.ChartType.Line;
 
+        _chart.YAxisLabel = "BMI";
+        _chart.XAxisLabel = "Date";
+
         BmiChart.Invalidate();
     }
 

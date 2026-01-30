@@ -28,6 +28,9 @@ public partial class ActivityPage : ContentPage
             ? ChartDrawable.ChartType.Bar
             : ChartDrawable.ChartType.Line;
 
+        _chart.YAxisLabel = "Minutes Active";
+        _chart.XAxisLabel = "Date";
+
         ActivityChart.Invalidate();
     }
 
